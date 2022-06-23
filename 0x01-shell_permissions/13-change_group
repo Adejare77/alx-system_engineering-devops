@@ -1,2 +1,2 @@
 #!/bin/bash
-sudo hgrp school file
+sudo chgrp school file
