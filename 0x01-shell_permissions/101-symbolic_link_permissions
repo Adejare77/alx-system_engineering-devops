@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo chown -P vincent $(ls)| chgrp -P staff $(ls)
