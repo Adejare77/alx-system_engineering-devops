@@ -1,0 +1,2 @@
+#!/bin/bash
+SHELL, I/O REDIRECTIONS AND FILTERS
