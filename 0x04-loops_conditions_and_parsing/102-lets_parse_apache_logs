@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Displays the visitor IP along with the HTTP status code from
-# Apache log file
+# Apache log file (given)
 # Requirements:
 # Format: IP HTTP_CODE (e.g 185.130.5.207 301)
 # You must use "awk"
