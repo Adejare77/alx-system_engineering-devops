@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# script that stops 4-to-infinity_and_beyond process. Requirements:
+# You cannot use kill or killall
+
+pkill --signal 15 -f ./7-highlander
