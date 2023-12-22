@@ -8,4 +8,4 @@
 
 # awk '{a[$1, $9, $10]++} END {for (i in a) print a[i], i}' < apache-access.log
 # awk '{a[$1 " " $9]++} END {for (i in a) print a[i], i}' < apache-access.log | sort
-awk '{a[$1 " " $9]++} END {for (i in a) print "\t", a[i], i | "sort -nr"}' < apache-access.log
+awk '{a[$1 " " $9]++} END {for (i in a) print "    ", a[i], i | "sort -nr"}' < apache-access.log
