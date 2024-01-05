@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Displays all active IPv4 IPS on the machine it's executed on
-# ifconfig | grep -Eoi "inet [0-9.]+" | grep -Eo "[0-9.]+"
-ifconfig | grep -Po "(?<=inet\s)[0-9.]+"
+ifconfig | grep -Eoi "inet [0-9.]+" | grep -Eo "[0-9.]+"
+# ifconfig | grep -Po "(?<=inet\s)[0-9.]+"
