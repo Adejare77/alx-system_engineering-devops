@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# configuring local SSH client to connect to a server without typing a password
+Host alx_server
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no
