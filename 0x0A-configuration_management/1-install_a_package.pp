@@ -2,6 +2,7 @@
 
 package { 'install_werkzeug':
   ensure   => '1.0.1',
+   name    => 'werkzeug',
   provider => 'pip3',
 }
 
