@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# get Apache to run on the container and to return a
+# page containing Hello Holberton when querying the root of it.
+
+# inside the holbertonschool/265-0 container
+# install apache2
+sudo apt-get install apache2
+
+# start apache2
+service apache2 start
