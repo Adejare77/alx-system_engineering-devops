@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Installs nginx web server
+
+# checks if nginx is installed or not
+_="$(which nginx)";  # if nginx is not installed, it'll be error
+
+if (("$?" == 1))  # if there is error above, then this will be true, else false
+then
+    sudo apt-get install nginx -y;
+fi
+
+# the configuration file for nginx can be found at /etc/nginx/sites-available/default
+# delete repetive listen port for IPv6
+sed -i '/listen .*:.*/d' /etc/nginx/sites-available/default;
+sed -i 's/listen .*/listen 80 default_server;/' /etc/nginx/sites-available/default;
+
+# since, we've made changes to the sites-available, we have to first remove its sym link
+sudo rm /etc/nginx/sites-enabled/default;
+
+# then, update sites-enabled with the new sym link
+ln -s  /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
+
+echo "Hello World!" > /var/www/html/index.html;
+# Get the service to run nginx
+sudo service nginx restart;

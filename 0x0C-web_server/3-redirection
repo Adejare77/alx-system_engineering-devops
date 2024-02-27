@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+# Redirection
+
+# update
+sudo apt update
+
+if (("$(pgrep -c nginx)" == 0))  # checks if already installed
+then
+    sudo apt-get install nginx -y;
+fi
+
+nginx_config="server {
+        listen 80 default_server;
+        listen [::]:80;
+
+        root /var/www/html;
+        index index.html
+        server_name _;
+
+        location / {
+            try_files \$uri \$uri / =404;
+        }
+
+        location /redirect_me {
+            return 301 \"https://www.youtube.com/watch?v=QH2-TGUlwu4\";
+        }
+}"
+
+
+echo -e "$nginx_config" > /etc/nginx/sites-available/default;
+
+sudo rm /etc/nginx/sites-enabled/default;
+ln -s  /etc/nginx/sites-available/default /etc/nginx/sites-enabled/;
+
+echo "Hello World!" > /var/www/html/index.html;
+
+sudo service nginx restart;
