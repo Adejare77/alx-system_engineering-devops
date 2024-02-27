@@ -2,5 +2,5 @@
 # get Apache to run on the container and to return a
 # page containing Hello Holberton when querying the root of it.
 
-# start apache2 already present
-service apache2 start
+# start apache2 (already installed)
+sudo service apache2 start
