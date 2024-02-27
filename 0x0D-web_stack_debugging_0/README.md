@@ -1,7 +1,7 @@
 # Docker
 
 Introduction to the use of Docker container.
-In this project, I learned to use basic Docker commands for Networkwork Debugging.
+In this project, I learned to use basic Docker commands for Web Stack Debugging.
 
 ## Install Docker on Ubuntu Terminal
 
