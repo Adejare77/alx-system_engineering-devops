@@ -1,9 +1,4 @@
 #!/usr/bin/env bash
-# get Apache to run on the container and to return a
-# page containing Hello Holberton when querying the root of it.
-docker run -p 8080:80 -d -ti holbertonschool/265-0
-
-docker exec -ti trusting_pascal /bin/bash
-
-# start apache2
+# get Apache to run on the container and to return a page containing Hello Holberton when querying the root of it.
+# start apache2 (already installed on it)
 service apache2 start
