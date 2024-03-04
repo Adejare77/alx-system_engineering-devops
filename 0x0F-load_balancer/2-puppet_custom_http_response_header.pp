@@ -8,10 +8,12 @@ exec { 'update_and_upgrade':
 }
 
 
-exec { 'install_nginx':
-  command  => 'sudo apt-get install nginx -y',
+exec {'install_nginx':
   provider => shell,
+  command  => 'sudo apt-get -y install nginx',
+  before   => Exec['add_header'],
 }
+
 
 exec { 'add_header':
   provider    => shell,
