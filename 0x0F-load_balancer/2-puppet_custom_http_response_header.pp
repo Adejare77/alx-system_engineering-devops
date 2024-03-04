@@ -4,12 +4,13 @@
 exec { 'update_and_upgrade':
   command => 'apt update && apt upgrade -y',
   path    => '/usr/bin:/bin',
+  before  => Package['install_nginx']
 }
 
 package { 'install_nginx':
   ensure   => 'installed',
   name     => 'nginx',
-  provider => 'apt',
+  provider => apt,
   require  => Exec['update_and_upgrade'],
 }
 
@@ -21,6 +22,7 @@ exec { 'custom_header':
 }
 
 exec { 'restart_nginx':
-  command   => '/usr/sbin/service nginx restart',
+  provider => shell,
+  command  => 'sudo service nginx restart',
 }
 
