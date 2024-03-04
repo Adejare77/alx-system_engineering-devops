@@ -11,7 +11,6 @@ exec { 'update_and_upgrade':
 exec { 'install_nginx':
   command  => 'sudo apt-get install nginx -y',
   provider => shell,
-  require  => Exec['update_and_upgrade'],
 }
 
 exec { 'add_header':
