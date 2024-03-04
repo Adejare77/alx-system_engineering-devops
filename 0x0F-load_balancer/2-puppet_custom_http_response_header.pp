@@ -17,13 +17,10 @@ exec { 'custom_header':
   command => 'sed -i "16i\\        add_header X-Served-By \$hostname;" /etc/nginx/nginx.conf',
   path    => '/usr/bin:/bin',
   require => Package['install_nginx'],
-  notify  => Service['restart_nginx']
+  notify  => Exec['restart_nginx']
 }
 
-service { 'restart_nginx':
-  ensure   => 'running',
-  name     => 'nginx',
-  enable   => 'true',
-  provider => 'systemd',
+exec { 'restart_nginx':
+  command   => '/usr/sbin/service nginx restart',
 }
 
