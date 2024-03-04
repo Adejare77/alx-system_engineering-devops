@@ -2,9 +2,9 @@
 # header (on web-01 and web-02) with Puppet.
 
 exec { 'update_and_upgrade':
-  command => 'sudo apt-get update -y && sudo apt-get upgrade -y',
-  provider    => shell,
-  before  => Exec['install_nginx']
+  command  => 'sudo apt-get update -y && sudo apt-get upgrade -y',
+  provider => shell,
+  before   => Exec['install_nginx']
 }
 
 exec { 'install_nginx':
@@ -14,8 +14,10 @@ exec { 'install_nginx':
 }
 
 exec { 'custom_header':
-  command  => 'sed -i "16i\\        add_header X-Served-By \$hostname;" /etc/nginx/nginx.conf',
+  # command  => 'sed -i "16i\\        add_header X-Served-By \$hostname;" /etc/nginx/nginx.conf',
   provider => shell,
+  environment => ["HOST=${hostname}"],
+  command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOST\";/" /etc/nginx/nginx.conf',
   require  => Exec['install_nginx'],
   notify   => Exec['restart_nginx']
 }
