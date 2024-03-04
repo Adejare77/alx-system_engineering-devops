@@ -1,8 +1,8 @@
 # Configure Nginx so that its HTTP response contains a custom
 # header (on web-01 and web-02) with Puppet.
 
-exec { 'update_and_upgrade':
-  command => 'sudo apt update -y && sudo apt -y upgrade',
+exec { 'update':
+  command => 'sudo apt update -y',
   provider => shell,
   before  => Package['install_nginx']
 }
@@ -11,7 +11,7 @@ package { 'install_nginx':
   ensure   => 'installed',
   name     => 'nginx',
   provider => apt,
-  before   => Exec['custom_header'],
+  require   => Exec['update'],
 }
 
 exec { 'custom_header':
