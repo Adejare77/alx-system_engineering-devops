@@ -4,16 +4,15 @@
 exec { 'update_and_upgrade':
   provider => shell,
   command  => 'sudo apt-get -y update',
-  before   => Exec['install Nginx'],
+  before   => Exec['install_nginx'],
 }
 
 
 exec { 'install_nginx':
+  command  => 'sudo apt-get install nginx -y',
   provider => shell,
-  command  => 'sudo apt-get -y install nginx',
-  before   => Exec['add_header'],
+  require  => Exec['update_and_upgrade'],
 }
-
 
 exec { 'add_header':
   provider    => shell,
