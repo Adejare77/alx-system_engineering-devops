@@ -15,10 +15,10 @@ package { 'install_nginx':
 }
 
 exec { 'custom_header':
-  command => 'sed -i "16i\\        add_header X-Served-By \$hostname;" /etc/nginx/nginx.conf',
-  path    => '/usr/bin:/bin',
-  require => Package['install_nginx'],
-  notify  => Exec['restart_nginx']
+  command  => 'sed -i "16i\\        add_header X-Served-By \$hostname;" /etc/nginx/nginx.conf',
+  provider => shell,
+  require  => Package['install_nginx'],
+  notify   => Exec['restart_nginx']
 }
 
 exec { 'restart_nginx':
