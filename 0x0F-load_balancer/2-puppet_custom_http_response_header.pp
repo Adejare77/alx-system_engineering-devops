@@ -1,28 +1,26 @@
 # Configure Nginx so that its HTTP response contains a custom
 # header (on web-01 and web-02) with Puppet.
 
-exec { 'update_and_upgrade':
-  command  => 'sudo apt-get update -y && sudo apt-get upgrade -y',
+exec {'update':
   provider => shell,
-  before   => Exec['install_nginx']
+  command  => 'sudo apt-get -y update',
+  before   => Exec['install Nginx'],
 }
 
-exec { 'install_nginx':
-  command  => 'sudo apt-get install nginx -y',
+exec {'install Nginx':
   provider => shell,
-  require  => Exec['update_and_upgrade'],
+  command  => 'sudo apt-get -y install nginx',
+  before   => Exec['add_header'],
 }
 
-exec { 'custom_header':
-  # command  => 'sed -i "16i\\        add_header X-Served-By \$hostname;" /etc/nginx/nginx.conf',
-  provider => shell,
+exec { 'add_header':
+  provider    => shell,
   environment => ["HOST=${hostname}"],
   command     => 'sudo sed -i "s/include \/etc\/nginx\/sites-enabled\/\*;/include \/etc\/nginx\/sites-enabled\/\*;\n\tadd_header X-Served-By \"$HOST\";/" /etc/nginx/nginx.conf',
-  require  => Exec['install_nginx'],
-  notify   => Exec['restart_nginx']
+  before      => Exec['restart Nginx'],
 }
 
-exec { 'restart_nginx':
+exec { 'restart Nginx':
   provider => shell,
   command  => 'sudo service nginx restart',
 }
