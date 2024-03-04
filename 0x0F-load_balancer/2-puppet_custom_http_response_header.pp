@@ -2,8 +2,8 @@
 # header (on web-01 and web-02) with Puppet.
 
 exec { 'update_and_upgrade':
-  command => 'apt update && apt upgrade -y',
-  path    => '/usr/bin:/bin',
+  command => 'sudo apt update -y',
+  provider => shell,
   before  => Package['install_nginx']
 }
 
