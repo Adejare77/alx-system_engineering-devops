@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # Configures an Nginx server to listen on port 80.
 
+apt-get install nginx -y
 service nginx restart
