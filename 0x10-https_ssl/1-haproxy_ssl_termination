@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Terminating SSL on HAproxy” means that HAproxy is configured
+# to handle encrypted traffic, unencrypt it and pass it on to
+#its destination
+
+global
+    log /dev/log    local0
+    log /dev/log    local1 notice
+    stats timeout 30s
+    user haproxy
+    group haproxy
+
+defaults
+    log     global
+    mode    http
+    option  httplog
+    option  dontlognull
+    timeout connect 5000
+    timeout client  50000
+    timeout server  50000
+    retries 3
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/500.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+
+frontend traffic_80
+    mode http
+    bind 0:80
+    acl my_ssl_request ssl_fc
+    redirect scheme https if !my_ssl_request
+
+frontend traffic_443
+    mode http
+    bind 0:443 ssl crt etc/haproxy/certs/rashisky.tech.pem
+    default_backend my_servers
+
+backend my_servers
+    balance roundrobin
+    server my_server_1 web-01.rashisky.tech:80 check
+    server my_server_2 web-02.rashisky.tech:80 check
