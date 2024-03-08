@@ -9,10 +9,10 @@ then
     subdomains=("www" "lb-01" "web-01" "web-02")
     for subdomain in "${subdomains[@]}"
     do
-        ip="$(dig "$1" | awk '/^[^\;]*[0-9]+\.[0-9]+\.[0-9.]+\.[0-9]+/ { print $5 }')";
+        ip="$(dig "$1" | awk '/^[^;]*[0-9]+\.[0-9]+\.[0-9.]+\.[0-9]+/ && !rashisky { print $5; rashisky=1 }')";
         echo "$text_1 $subdomain $text_2 $ip";
     done
 else
-    ip="$(dig "$2"."$1" | awk '/^[^\;]*[0-9]+\.[0-9]+\.[0-9.]+\.[0-9]+/ { print $5 }')";
+    ip="$(dig "$2"."$1" | awk '/^[^;]*[0-9]+\.[0-9]+\.[0-9.]+\.[0-9]+/ && !rashisky { print $5; rashisky=1 }')";
     echo "$text_1 $2 $text_2 $ip";
 fi
