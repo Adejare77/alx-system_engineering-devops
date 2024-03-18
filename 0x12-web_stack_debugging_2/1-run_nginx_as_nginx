@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# Nginx is running as the ngix user
+
+sudo apt-get update -y
+
+# checks if nginx is not installed. if true, install it
+if (("$(pgrep -c nginx)" == 0))
+then
+    sudo apt-get install nginx -y;
+fi
+
+# change user to "nginx"
+awk '/user/ { $2 = "nginx;" }1' /etc/nginx/nginx.conf > temp && mv temp /etc/nginx/nginx.conf;
+
+# Replace 'listen' with port 8080
+awk '/listen [^\[][0-9]*/ { $0 = "\tlisten 8080 default_server;"}1' /etc/nginx/sites-available/default > temp && mv temp /etc/nginx/sites-available/default;
+
+# checks if symbolic link is present. if true, delete it
+if (! ls /etc/nginx/sites-enabled/default 2&>1 /dev/null)
+then
+    sudo rm -r /etc/nginx/sites-enabled/default;
+fi
+
+# creates a symbolic link
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default;
+
+# Restart Nginx
+sudo service nginx restart;
