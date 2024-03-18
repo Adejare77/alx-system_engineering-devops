@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Nginx is running as the ngix user
+sed -i 's/user.*/user nginx/' /etc/nginx/nginx.conf
+sed -i 's/listen [^/[][0-9]*/listen 8080/' /etc/nginx/sites-available/default
+sudo rm -r /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo service nginx restart;
