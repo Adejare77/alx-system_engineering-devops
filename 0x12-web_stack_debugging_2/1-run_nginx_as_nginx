@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
-# Nginx is running as the ngix user
+# Nginx is running as the ngix user. Use "awk" command
 
 # change user to "nginx"
-# sed -i 's/user.*/user nginx;/' /etc/nginx/nginx.conf
 awk '/user/ { $2 = "nginx;" }1' /etc/nginx/nginx.conf > temp && mv temp /etc/nginx/nginx.conf
 
 # Replace 'listen' with port 8080 ($NF is optional)
 awk '/listen/ { gsub(/[0-9]+$/, "8080", $NF) }1' /etc/nginx/sites-available/default > temp && mv temp /etc/nginx/sites-available/default
-# sed -i 's/80/8080/' /etc/nginx/sites-available/default
 
 # change nginx mode
 chmod 644 /etc/nginx/nginx.conf
