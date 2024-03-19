@@ -24,5 +24,8 @@ fi
 # creates a symbolic link
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default;
 
+# kill apache2
+pkill apache2
+
 # Restart Nginx
-sudo service nginx restart;
+sudo -u nginx service nginx restart;
