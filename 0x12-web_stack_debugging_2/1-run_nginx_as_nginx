@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 # Nginx is running as the ngix user
 
-sudo apt-get update -y
-
-# checks if nginx is not installed. if true, install it
-if (("$(pgrep -c nginx)" == 0))
-then
-    sudo apt-get install nginx -y;
-fi
-
 # change user to "nginx"
 awk '/user/ { $2 = "nginx;" }1' /etc/nginx/nginx.conf > temp && mv temp /etc/nginx/nginx.conf;
 
@@ -23,6 +15,9 @@ fi
 
 # creates a symbolic link
 sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default;
+
+# change nginx mode
+chmod 644 /etc/nginx/nginx.conf
 
 # kill apache2
 pkill apache2
