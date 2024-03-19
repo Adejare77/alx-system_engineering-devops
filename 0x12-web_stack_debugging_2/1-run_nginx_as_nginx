@@ -2,8 +2,8 @@
 # Nginx is running as the ngix user
 
 # change user to "nginx"
-awk '/user/ { $2 = "nginx;" }1' /etc/nginx/nginx.conf > temp && mv temp /etc/nginx/nginx.conf
 # sed -i 's/user.*/user nginx;/' /etc/nginx/nginx.conf
+awk '/user/ { $2 = "nginx;" }1' /etc/nginx/nginx.conf > temp && mv temp /etc/nginx/nginx.conf
 
 # Replace 'listen' with port 8080
 # awk '/listen [^\[][0-9]*/ { $0 = "\tlisten 8080 default_server;"}1' /etc/nginx/sites-available/default > temp && mv temp /etc/nginx/sites-available/default
