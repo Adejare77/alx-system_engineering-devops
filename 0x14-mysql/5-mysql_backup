@@ -11,4 +11,7 @@ then
 
     # Compress backup.sql into file_name
     tar -czf "$file_name" backup.sql
+
+    # Change the modification time of the tar file
+    touch -d "$(date)" "$file_name"
 fi
