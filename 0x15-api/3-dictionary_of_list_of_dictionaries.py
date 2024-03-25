@@ -24,9 +24,9 @@ if __name__ == '__main__':
                 if todos.get("userId") == user.get("id"):
                     value.append(
                         {"username": user.get("username"),
-                        "task": todos.get("title"),
-                        "completed": todos.get("completed"),
-                        }
+                         "task": todos.get("title"),
+                         "completed": todos.get("completed"),
+                         }
                     )
             _dict[user.get("id")] = value
 

@@ -27,7 +27,7 @@ if __name__ == '__main__':
                     {"task": todos.get("title"),
                      "completed": todos.get("completed"),
                      "username": username
-                    }
+                     }
                 )
 
         json_file = user_id + ".json"
