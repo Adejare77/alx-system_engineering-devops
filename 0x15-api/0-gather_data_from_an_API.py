@@ -9,7 +9,6 @@ from sys import argv
 
 if __name__ == '__main__':
     # since we're interested in the employees name and todo:
-    # Method 1 (inefficient)
     users_names = requests.get("https://jsonplaceholder.typicode.com/users")
     users_todos = requests.get("https://jsonplaceholder.typicode.com/todos")
 
@@ -27,6 +26,6 @@ if __name__ == '__main__':
                       if todos.get("userId") == int(argv[1]) and
                       todos.get("completed")]
 
-        print(f'Employee {user} is done with tasks \
+        print(f'Employee {user} is done with tasks\
 ({len(cmpltd_tasks)}/{len(total_tasks)}):')
         [print("\t", task) for task in task_title]
