@@ -19,7 +19,6 @@ def count_words(subreddit, word_list, after="", **kwargs):
 
     resp = requests.get(url=url, headers=headers, allow_redirects=False)
 
-    word_list = [word.lower() for word in word_list]
     if not kwargs:
         for word in word_list:
             kwargs[word] = 0
@@ -31,9 +30,9 @@ def count_words(subreddit, word_list, after="", **kwargs):
 
         for i in range(num_of_children):
             child_title = (children[i]['data']['title']).lower().split()
-            for word in child_title:
-                if word in word_list:
-                    kwargs[word] += 1
+            for word in word_list:
+                if word.lower() in child_title:
+                    kwargs[word.lower()] += 1
 
         if json_resp['data']['after']:  # if after != None
             return count_words(subreddit, word_list,
