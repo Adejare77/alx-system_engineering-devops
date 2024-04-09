@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Query the Reddit API ('https://www.reddit.com/dev/api')"""
 
-from sys import argv
 import requests
 
 
@@ -11,7 +10,7 @@ def number_of_subscribers(subreddit):
     """
     headers = {"User-Agent": "Linux 6.2.0-39-generic/vscode:v1.88.0\
                (by /u/rashisky)"}
-    url = "https://www.reddit.com/r/{}/about.json".format(argv[1])
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
 
     resp = requests.get(url=url, headers=headers, allow_redirects=False)
 
