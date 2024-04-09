@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Query the Reddit API ('https://www.reddit.com/dev/api')"""
 
-import requests
 from sys import argv
+import requests
 
 
 def number_of_subscribers(subreddit):
