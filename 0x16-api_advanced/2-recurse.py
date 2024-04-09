@@ -2,7 +2,6 @@
 """Query the Reddit API ('https://www.reddit.com/dev/api')"""
 
 import requests
-from sys import argv
 
 
 def recurse(subreddit, hot_list=[], after="null"):
@@ -17,7 +16,7 @@ def recurse(subreddit, hot_list=[], after="null"):
     headers = {"User-Agent": "Linux 6.2.0-39-generic/vscode:v1.88.0\
                (by /u/rashisky)"}
     url = "https://www.reddit.com/r/{}/hot.json?limit=100&after={}"\
-        .format(argv[1], after)
+        .format(subreddit, after)
 
     resp = requests.get(url=url, headers=headers, allow_redirects=False)
 

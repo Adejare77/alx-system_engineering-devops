@@ -2,7 +2,6 @@
 """Query the Reddit API ('https://www.reddit.com/dev/api')"""
 
 import requests
-from sys import argv
 
 
 def top_ten(subreddit):
@@ -11,7 +10,7 @@ def top_ten(subreddit):
     """
     headers = {"User-Agent": "Linux 6.2.0-39-generic/vscode:v1.88.0\
                (by /u/rashisky)"}
-    url = "https://www.reddit.com/r/{}/hot.json".format(argv[1])
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
 
     resp = requests.get(url=url, headers=headers, allow_redirects=False)
 
