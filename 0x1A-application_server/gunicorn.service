@@ -1,4 +1,3 @@
-# Intitiate gunicorn start up on system startup
 [Unit]
 Description="starts gunicorn on systemt startup on port 5003"
 After=network.target
