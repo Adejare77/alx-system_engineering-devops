@@ -1,5 +1,6 @@
+# Starts gunicorn on port 5003 on system startup
 [Unit]
-Description="starts gunicorn on systemt startup on port 5003"
+Description=Starts gunicorn on system startup on port 5003
 After=network.target
 
 [Service]
@@ -9,6 +10,9 @@ WorkingDirectory=/home/adejare/AirBnB_clone_v4/
 StandardError=/tmp/airbnb-error.log
 StandardOutput=/tmp/airbnb-access.log
 ExecStart=/usr/bin/gunicorn -w 3 -b 0.0.0.0:5003 web_dynamic.2-hbnb:app
+ExecReload=/usr/bin/kill -HUP $MAINPID
+ExecStop=/usr/bin/kill --signal TERM $MAINPID
+Restart=no
 
 [Install]
 WantedBy=multi-user.target
