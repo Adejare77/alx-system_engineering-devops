@@ -8,6 +8,6 @@ then
     workers=("$(pgrep gunicorn | tail -n +2)");
     for worker in "${workers[@]}"
     do
-        sudo kill -TERM "${worker}"
+        kill -TERM "${worker}"
     done
 fi
