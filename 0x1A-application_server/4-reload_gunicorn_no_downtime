@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
-# update an application by gracefully terminating their workers
-# and not their master
+# update an application by gracefully reloading or terminating
+# their workers and not their master
 
 if (("$(pgrep -c gunicorn)"))
 then
     # no_of_processes="$(("$(pgrep -c gunicorn)" - 1))"
-    workers=("$(pgrep gunicorn | tail -n +2)");
+    workers=("$(pgrep gunicorn)");
     for worker in "${workers[@]}"
     do
         sudo kill -TERM "${worker}"
     done
 fi
-sudo reboot
